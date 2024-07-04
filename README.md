@@ -32,35 +32,20 @@ If you want to run training or testing, you must configure the paths to the data
   <img src="./assets/img/demo_gui.jpg" alt="drawing" width="99%"/>
 </p>
 
-The GUI is based on TkInter library and its Python bindings. You can try our interactive demo with any of the 
-[provided models](#pretrained-models). Our scripts automatically detect the architecture of the loaded model, just 
+The GUI is based on TkInter library and its Python bindings. You can try to interactivly segment avalanches with the demo with one of the 
+[provided models](#pretrained-models). The scripts automatically detect the architecture of the loaded model, you only need to 
 specify the path to the corresponding checkpoint.
 
 Examples of the script usage:
 
 ```.bash
-# This command runs interactive demo with HRNet18 ITER-M model from cfg.INTERACTIVE_MODELS_PATH on GPU with id=0
-# --checkpoint can be relative to cfg.INTERACTIVE_MODELS_PATH or absolute path to the checkpoint
-python3 demo.py --checkpoint=hrnet18_cocolvis_itermask_3p --gpu=0
-
-# This command runs interactive demo with HRNet18 ITER-M model from /home/demo/isegm/weights/
-# If you also do not have a lot of GPU memory, you can reduce --limit-longest-size (default=800)
-python3 demo.py --checkpoint=/home/demo/fBRS/weights/hrnet18_cocolvis_itermask_3p --limit-longest-size=400
+# This command runs interactive demo with HRNet18 ITER-M model trained on the SLF dataset from /data/ritm_interactive_segmentation/datasets/checkpoints/
+# If you also do not have a lot of GPU memory, you can reduce --limit-longest-size (default=800; 3600 was the longest we could handle with a NVIDIA GeForce RTX 2080 Ti)
+python3 demo.py --checkpoint=/data/ritm_interactive_segmentation/datasets/checkpoints/082_epo090.pth --gpu=0 --limit-longest-size=3600
 
 # You can try the demo in CPU only mode
-python3 demo.py --checkpoint=hrnet18_cocolvis_itermask_3p --cpu
+python3 demo.py --checkpoint=/data/ritm_interactive_segmentation/datasets/checkpoints/082_epo090.pth --cpu
 ```
-
-<details>
-<summary><b>Running demo in docker</b></summary>
-<pre><code># activate xhost
-xhost +
-docker run -v "$PWD":/tmp/ \
-           -v /tmp/.X11-unix:/tmp/.X11-unix \
-           -e DISPLAY=$DISPLAY &lt;id-or-tag-docker-built-image&gt; \
-           python3 demo.py --checkpoint resnet34_dh128_sbd --cpu
-</code></pre>
-</details>
 
 **Controls**:
 
@@ -69,19 +54,17 @@ docker run -v "$PWD":/tmp/ \
 | <kbd>Left Mouse Button</kbd>                                  | Place a positive click             |
 | <kbd>Right Mouse Button</kbd>                                 | Place a negative click             |
 | <kbd>Scroll Wheel</kbd>                                       | Zoom an image in and out           |
-| <kbd>Right Mouse Button</kbd> + <br> <kbd>Move Mouse</kbd>    | Move an image                      |
+| <kbd>Right Mouse Button</kbd> + <br> <kbd>Move Mouse</kbd>    | Pan the image                      |
 | <kbd>Space</kbd>                                              | Finish the current object mask     |
 
 <details>
-<summary><b>Initializing the ITER-M models with an external segmentation mask</b></summary>
+<summary><b>Correct existing external segmentation mask</b></summary>
 <p align="center">
   <img src="./assets/img/modifying_external_mask.jpg" alt="drawing" width="80%"/>
 </p>
   
-According to our paper, ITER-M models take an image, encoded user input, and a previous step mask as their input. Moreover, a user can initialize the model with an external mask before placing any clicks and correct this mask using the same interface.  As it turns out, our models successfully handle this situation and make it possible to change the mask.
-
-
-To initialize any ITER-M model with an external mask use the "Load mask" button in the menu bar.
+A user can initialize the model with an external mask before placing any clicks and correcting the mask using the same interface. 
+To do so the demo can be run with any model train configuration and an external mask can be added via the "Load mask" button in the menu bar and consequently adapted.
 </details>
 
 <details>
