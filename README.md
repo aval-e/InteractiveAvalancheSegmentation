@@ -36,7 +36,7 @@ specify the path to the corresponding checkpoint.
 Examples of the script usage:
 
 ```.bash
-# This command runs interactive demo with HRNet18 ITER-M model trained on the SLF dataset from /data/ritm_interactive_segmentation/datasets/checkpoints/
+# This command runs interactive demo with the model trained on the SLF dataset from /data/ritm_interactive_segmentation/datasets/checkpoints/
 # If you also do not have a lot of GPU memory, you can reduce --limit-longest-size (default=800; 3600 was the longest we could handle with a NVIDIA GeForce RTX 2080 Ti)
 python3 demo.py --checkpoint=/data/ritm_interactive_segmentation/datasets/checkpoints/082_epo090.pth --gpu=0 --limit-longest-size=3600
 
