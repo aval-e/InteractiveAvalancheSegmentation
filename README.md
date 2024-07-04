@@ -116,7 +116,6 @@ python3 scripts/evaluate_model.py NoBRS --checkpoint=datasets/checkpoints/082_ep
 
 Below you find the scripts for training our model on an avalanche dataset. You can start training with the following command:
 ```.bash
-# ResNet-34 non-iterative baseline model
 python3 train.py models/iter_mask/hrnet18_avalanche_itermask_3p.py --gpus=0 --workers=4 --exp-name=train_test --weights=weights/coco_lvis_h18_itermask.pth --batch-size=4
 
 ```
