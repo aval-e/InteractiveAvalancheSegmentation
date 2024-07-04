@@ -74,38 +74,18 @@ To do so the demo can be run with any model train configuration and an external 
 
 ## Datasets
 
-We train all our models on SBD and COCO+LVIS and evaluate them on GrabCut, Berkeley, DAVIS, SBD and PascalVOC. We also provide links to additional datasets: ADE20k and OpenImages, that are used in ablation study.
+As baseline we use the model by Sofiiuk et al trained on COCO+LVIS, then we finetune on our own avalanche dataset (SLF), on avalanche images from the University of Innsbruck (UIBK) and a combination of those two. 
 
-| Dataset   |                      Description             |           Download Link              |
-|-----------|----------------------------------------------|:------------------------------------:|
-|ADE20k     |  22k images with 434k instances (total)      |  [official site][ADE20k]             |
-|OpenImages |  944k images with 2.6M instances (total)     |  [official site][OpenImages]         |
-|MS COCO    |  118k images with 1.2M instances (train)     |  [official site][MSCOCO]             |
-|LVIS v1.0  |  100k images with 1.2M instances (total)     |  [official site][LVIS]               |
-|COCO+LVIS* |  99k images with 1.5M instances (train)      |  [original LVIS images][LVIS] + <br> [our combined annotations][COCOLVIS_annotation] |
-|SBD        |  8498 images with 20172 instances for (train)<br>2857 images with 6671 instances for (test) |[official site][SBD]|
-|Grab Cut   |  50 images with one object each (test)       |  [GrabCut.zip (11 MB)][GrabCut]      |
-|Berkeley   |  96 images with 100 instances (test)         |  [Berkeley.zip (7 MB)][Berkeley]     |
-|DAVIS      |  345 images with one object each (test)      |  [DAVIS.zip (43 MB)][DAVIS]          |
-|Pascal VOC |  1449 images with 3417 instances (validation)|  [official site][PascalVOC]          |
-|COCO_MVal  |  800 images with 800 instances (test)        |  [COCO_MVal.zip (127 MB)][COCO_MVal] |
+| Dataset    |   Data size          |      Download Link       |
+|------------|----------------------|:------------------------:|
+|SLF dataset |  300+ avalanches     |  [data][SLF]             |
+|UIBK dataset|  3000+ avalanches    |  [data][UIBK]            |
 
-[ADE20k]: http://sceneparsing.csail.mit.edu/
-[OpenImages]: https://storage.googleapis.com/openimages/web/download.html
-[MSCOCO]: https://cocodataset.org/#download
-[LVIS]: https://www.lvisdataset.org/dataset
-[SBD]: http://home.bharathh.info/pubs/codes/SBD/download.html
-[GrabCut]: https://github.com/saic-vul/fbrs_interactive_segmentation/releases/download/v1.0/GrabCut.zip
-[Berkeley]: https://github.com/saic-vul/fbrs_interactive_segmentation/releases/download/v1.0/Berkeley.zip
-[DAVIS]: https://github.com/saic-vul/fbrs_interactive_segmentation/releases/download/v1.0/DAVIS.zip
-[PascalVOC]: http://host.robots.ox.ac.uk/pascal/VOC/
-[COCOLVIS_annotation]: https://github.com/saic-vul/ritm_interactive_segmentation/releases/download/v1.0/cocolvis_annotation.tar.gz
-[COCO_MVal]: https://github.com/saic-vul/fbrs_interactive_segmentation/releases/download/v1.0/COCO_MVal.zip
+[SLF]: http://envidat.ch
+[UIBK]: https://researchdata.uibk.ac.at//records/h07f4-qzd17
 
-Don't forget to change the paths to the datasets in [config.yml](config.yml) after downloading and unpacking.
 
-(*) To prepare COCO+LVIS, you need to download original LVIS v1.0, then download and unpack our 
-pre-processed annotations that are obtained by combining COCO and LVIS dataset into the folder with LVIS v1.0.
+Don't forget to change the paths to the datasets in [config.yml](config.yml) afterwards.
 
 ## Testing
 
