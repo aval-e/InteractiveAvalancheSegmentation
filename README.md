@@ -213,35 +213,38 @@ Below you find the scripts for training our model on an avalanche dataset. You c
 python3 train.py models/iter_mask/hrnet18_avalanche_itermask_3p.py --gpus=0 --workers=4 --exp-name=train_test --weights=weights/coco_lvis_h18_itermask.pth --batch-size=4
 
 ```
+The data to be used needs to be specified in the [model](models/iter_mask/hrnet18_avalanche_itermask_3p.py) and in the [config.yml](config.yml)(see `EXPS_PATH` 
+variable). For each experiment, a separate folder is created in the `./experiments` with Tensorboard logs, text logs, 
+visualization and checkpoints. You can specify another path in the [config.yml](config.yml) .
 
-For each experiment, a separate folder is created in the `./experiments` with Tensorboard logs, text logs, 
-visualization and checkpoints. You can specify another path in the [config.yml](config.yml) (see `EXPS_PATH` 
-variable).
-
-
-We used the pre-trained HRNetV2 models from [the official repository](https://github.com/HRNet/HRNet-Image-Classification). 
-If you want to train interactive segmentation with these models, you need to download the weights and specify the paths to 
+If you want to train interactive segmentation from an existing model, you need to download the weights and specify the paths to 
 them in [config.yml](config.yml).
 
 ## License
 
-The code is released under the MIT License. It is a short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license notice in any copy of the software/source. 
+The original code was released under the MIT License by Sofiiuk et al. You may consequently do whatever you want with the code as long as you include the original and our copyright and license notice in any copy of the software/source. 
+
 ## Citation
 
-If you find this work is useful for your research, please cite our papers:
+If you find this work is useful for your research, please cite our paper:
+```
+@Article{ias_aval_2024,
+AUTHOR = {Hafner, E. D. and Kontogianni, T. and Caye Daudt, R. and Oberson, L. and Wegner, J. D. and Schindler, K. and B\"uhler, Y.},
+TITLE = {Interactive Snow Avalanche Segmentation from Webcam Imagery: results, potential and limitations},
+JOURNAL = {EGUsphere},
+VOLUME = {2024},
+YEAR = {2024},
+PAGES = {1--23},
+URL = {https://egusphere.copernicus.org/preprints/2024/egusphere-2024-498/},
+DOI = {10.5194/egusphere-2024-498}
+}
+```
+as well as the work we aere able to built upon:
 ```
 @article{reviving2021,
   title={Reviving Iterative Training with Mask Guidance for Interactive Segmentation},
   author={Sofiiuk, Konstantin and Petrov, Ilia and Konushin, Anton},
   journal={arXiv preprint arXiv:2102.06583},
   year={2021}
-}
-
-@inproceedings{fbrs2020,
-   title={f-brs: Rethinking backpropagating refinement for interactive segmentation},
-   author={Sofiiuk, Konstantin and Petrov, Ilia and Barinova, Olga and Konushin, Anton},
-   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-   pages={8623--8632},
-   year={2020}
 }
 ```
