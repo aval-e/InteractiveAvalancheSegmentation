@@ -53,43 +53,24 @@ python3 demo.py --checkpoint=/data/ritm_interactive_segmentation/datasets/checkp
 | ------------------------------------------------------------- | ---------------------------------- |
 | <kbd>Left Mouse Button</kbd>                                  | Place a positive click             |
 | <kbd>Right Mouse Button</kbd>                                 | Place a negative click             |
-| <kbd>Scroll Wheel</kbd>                                       | Zoom an image in and out           |
-| <kbd>Right Mouse Button</kbd> + <br> <kbd>Move Mouse</kbd>    | Pan the image                      |
+| <kbd>Roll scroll Wheel</kbd>                                  | Zoom an image in and out           |
+| <kbd> Push scroll Wheel</kbd>                                 | Pan the image                      |
+| <kbd>Left Mouse Button</kbd> + <br> <kbd>Move Mouse</kbd>     | Create a bounding Box              |
 | <kbd>Space</kbd>                                              | Finish the current object mask     |
 
-<details>
-<summary><b>Correct existing external segmentation mask</b></summary>
-<p align="center">
-  <img src="./assets/img/modifying_external_mask.jpg" alt="drawing" width="80%"/>
-</p>
-  
+
+**Correct existing external segmentation mask**:
+
 A user can initialize the model with an external mask before placing any clicks and correcting the mask using the same interface. 
 To do so the demo can be run with any model train configuration and an external mask can be added via the "Load mask" button in the menu bar and consequently adapted.
-</details>
 
-<details>
-<summary><b>Interactive segmentation options</b></summary>
-<ul>
-    <li>ZoomIn (can be turned on/off using the checkbox)</li>
-    <ul>
-        <li><i>Skip clicks</i> - the number of clicks to skip before using ZoomIn.</li>
-        <li><i>Target size</i> - ZoomIn crop is resized so its longer side matches this value (increase for large objects).</li>
-        <li><i>Expand ratio</i> - object bbox is rescaled with this ratio before crop.</li>
-        <li><i>Fixed crop</i> - ZoomIn crop is resized to (<i>Target size</i>, <i>Target size</i>).</li>
-    </ul>
-    <li>BRS parameters (BRS type can be changed using the dropdown menu)</li>
-    <ul>
-        <li><i>Network clicks</i> - the number of first clicks that are included in the network's input. Subsequent clicks are processed only using BRS  (NoBRS ignores this option).</li>
-        <li><i>L-BFGS-B max iterations</i> - the maximum number of function evaluation for each step of optimization in BRS (increase for better accuracy and longer computational time for each click).</li>  
-    </ul>
-    <li>Visualisation parameters</li>
-    <ul>
+
+**GUI visualization parameters**:
         <li><i>Prediction threshold</i> slider adjusts the threshold for binarization of probability map for the current object.</li> 
         <li><i>Alpha blending coefficient</i> slider adjusts the intensity of all predicted masks.</li>
         <li><i>Visualisation click radius</i> slider adjusts the size of red and green dots depicting clicks.</li>
-    </ul>
-</ul>
-</details>
+
+
 
 ## Datasets
 
