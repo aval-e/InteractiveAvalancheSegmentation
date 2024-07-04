@@ -94,6 +94,16 @@ We provide pretrained models with different backbones for interactive segmentati
 
 You can find model weights and evaluation results in the tables below:
 
+| Dataset    |       PTH model file         |
+|------------|:----------------------------:|
+|SLF         |  [082_epo095.pth][SLF1]      |
+|UIBK        |  [116_epo090.pth][UIBK1]     |
+|SLF + UIBK  |  [115_epo095.pth][SLF_UIBK]  |
+
+[SLF1]: addlinkgit.pth
+[UIBK1]: addlinkgit.pth
+[SLF_UIBK]: addlinkgit.pth
+
 <table>
     <thead align="center">
         <tr>
@@ -101,7 +111,7 @@ You can find model weights and evaluation results in the tables below:
             <th rowspan="2">Model</th>
             <th colspan="2">GrabCut</th>
             <th>Berkeley</th>
-            <th colspan="2">SBD</th>    
+            <th colspan="2">SLF</th>    
             <th colspan="2">DAVIS</th>
             <th>Pascal<br>VOC</th>
             <th>COCO<br>MVal</th>
@@ -187,57 +197,27 @@ You can find model weights and evaluation results in the tables below:
 
 ### Evaluation
 
-We provide the script to test all the presented models in all possible configurations on GrabCut, Berkeley, DAVIS, 
-Pascal VOC, and SBD. To test a model, you should download its weights and put them in `./weights` folder (you can 
-change this path in the [config.yml](config.yml), see `INTERACTIVE_MODELS_PATH` variable). To test any of our models, 
-just specify the path to the corresponding checkpoint. Our scripts automatically detect the architecture of the loaded model.
+To test any of our avalanche models, specify the path to the corresponding checkpoint and use the evaluate_model.py script. 
+The script automatically detects the architecture of the loaded model. The resize command only affects images larger than the given size. 
 
-The following command runs the NoC evaluation on all test datasets (other options are displayed using '-h'):
-
+Example for evaluation:
 ```.bash
-python3 scripts/evaluate_model.py <brs-mode> --checkpoint=<checkpoint-name>
+# This command evaluates the model trained on UIBK data in NoBRS mode on the UIBK test dataset
+python3 scripts/evaluate_model.py NoBRS --checkpoint=datasets/checkpoints/082_epo090.pth --datasets=Avalanche_uibk --resize 3600 2400
 ```
-
-Examples of the script usage:
-```.bash
-# This command evaluates HRNetV2-W18-C+OCR ITER-M model in NoBRS mode on all Datasets.
-python3 scripts/evaluate_model.py NoBRS --checkpoint=hrnet18_cocolvis_itermask_3p
-
-# This command evaluates HRNet-W18-C-Small-v2+OCR ITER-M model in f-BRS-B mode on all Datasets.
-python3 scripts/evaluate_model.py f-BRS-B --checkpoint=hrnet18s_cocolvis_itermask_3p
-
-# This command evaluates HRNetV2-W18-C+OCR ITER-M model in NoBRS mode on GrabCut and Berkeley datasets.
-python3 scripts/evaluate_model.py NoBRS --checkpoint=hrnet18_cocolvis_itermask_3p --datasets=GrabCut,Berkeley
-```
-
-### Jupyter notebook
-
-You can also interactively experiment with our models using [test_any_model.ipynb](./notebooks/test_any_model.ipynb) Jupyter notebook.
-
 ## Training
 
-We provide the scripts for training our models on the SBD dataset. You can start training with the following commands:
+Below you find the scripts for training our model on an avalanche dataset. You can start training with the following command:
 ```.bash
 # ResNet-34 non-iterative baseline model
-python3 train.py models/noniterative_baselines/r34_dh128_cocolvis.py --gpus=0 --workers=4 --exp-name=first-try
+python3 train.py models/iter_mask/hrnet18_avalanche_itermask_3p.py --gpus=0 --workers=4 --exp-name=train_test --weights=weights/coco_lvis_h18_itermask.pth --batch-size=4
 
-# HRNet-W18-C-Small-v2+OCR ITER-M model
-python3 train.py models/iter_mask/hrnet18s_cocolvis_itermask_3p.py --gpus=0 --workers=4 --exp-name=first-try
-
-# HRNetV2-W18-C+OCR ITER-M model
-python3 train.py models/iter_mask/hrnet18_cocolvis_itermask_3p.py --gpus=0,1 --workers=6 --exp-name=first-try
-
-# HRNetV2-W32-C+OCR ITER-M model
-python3 train.py models/iter_mask/hrnet32_cocolvis_itermask_3p.py --gpus=0,1,2,3 --workers=12 --exp-name=first-try
 ```
 
 For each experiment, a separate folder is created in the `./experiments` with Tensorboard logs, text logs, 
 visualization and checkpoints. You can specify another path in the [config.yml](config.yml) (see `EXPS_PATH` 
 variable).
 
-Please note that we trained ResNet-34 and HRNet-18s on 1 GPU, HRNet-18 on 2 GPUs, HRNet-32 on 4 GPUs 
-(we used Nvidia Tesla P40 for training). To train on a different GPU you should adjust the batch size using the command
-line argument `--batch-size` or change the default value in a model script.
 
 We used the pre-trained HRNetV2 models from [the official repository](https://github.com/HRNet/HRNet-Image-Classification). 
 If you want to train interactive segmentation with these models, you need to download the weights and specify the paths to 
