@@ -5,13 +5,10 @@ This repository provides the source code for the click-based interactive segment
 > Hafner, E. D., Kontogianni, T., Caye Daudt, R., Oberson, L., Wegner, J. D., Schindler, K., and Bühler, Y., EGUsphere [preprint],<br>
 > https://doi.org/10.5194/egusphere-2024-498, 2024.
 >
-the code that served as a basis was initially developed by 
+the code that served as a basis was initially developed and published in the following paper and repository 
 > **Konstantin Sofiiuk, Ilia Petrov, Anton Konushin**<br>
-> Samsung Research
-
-and published in the following paper and repository 
-
-> Reviving Iterative Training with Mask Guidance for Interactive Segmentation, https://arxiv.org/abs/2102.06583<br>
+> Reviving Iterative Training with Mask Guidance for Interactive Segmentation,<br>
+> Computer Vision and Pattern Recognition, https://arxiv.org/abs/2102.06583, 2021.<br><br>
 > https://github.com/SamsungLabs/ritm_interactive_segmentation
 
 
@@ -26,10 +23,10 @@ pip3 install -r requirements.txt
 
 If you want to run training or testing, you must configure the paths to the datasets in [config.yml](config.yml).
 
-## Interactive Segmentation Demo
+## Interactive Avalanche Segmentation Demo
 
 <p align="center">
-  <img src="./assets/img/demo_gui.jpg" alt="drawing" width="99%"/>
+  <img src="./assets/img/tmp_ias.JPG" alt="drawing" width="99%"/>
 </p>
 
 The GUI is based on TkInter library and its Python bindings. You can try to interactivly segment avalanches with the demo with one of the 
@@ -104,96 +101,6 @@ You can find model weights and evaluation results in the tables below:
 [UIBK1]: addlinkgit.pth
 [SLF_UIBK]: addlinkgit.pth
 
-<table>
-    <thead align="center">
-        <tr>
-            <th rowspan="2"><span style="font-weight:bold">Train</span><br><span style="font-weight:bold">Dataset</span></th>
-            <th rowspan="2">Model</th>
-            <th colspan="2">GrabCut</th>
-            <th>Berkeley</th>
-            <th colspan="2">SLF</th>    
-            <th colspan="2">DAVIS</th>
-            <th>Pascal<br>VOC</th>
-            <th>COCO<br>MVal</th>
-        </tr>
-        <tr>
-            <td>NoC<br>85%</td>
-            <td>NoC<br>90%</td>
-            <td>NoC<br>90%</td>
-            <td>NoC<br>85%</td>
-            <td>NoC<br>90%</td>
-            <td>NoC<br>85%</td>
-            <td>NoC<br>90%</td>
-            <td>NoC<br>85%</td>
-            <td>NoC<br>90%</td>
-        </tr>
-    </thead>
-    <tbody align="center">
-        <tr>
-            <td rowspan="1">SBD</td>
-            <td align="left"><a href="https://github.com/saic-vul/ritm_interactive_segmentation/releases/download/v1.0/sbd_h18_itermask.pth">HRNet18 IT-M<br>(38.8 MB)</a></td>
-            <td>1.76</td>
-            <td>2.04</td>
-            <td>3.22</td>
-            <td><b>3.39</b></td>
-            <td><b>5.43</b></td>
-            <td>4.94</td>
-            <td>6.71</td>
-            <td><ins>2.51</ins></td>
-            <td>4.39</td>
-        </tr>
-        <tr>
-            <td rowspan="4">COCO+<br>LVIS</td>
-            <td align="left"><a href="https://github.com/saic-vul/ritm_interactive_segmentation/releases/download/v1.0/coco_lvis_h18_baseline.pth">HRNet18<br>(38.8 MB)</a></td>
-            <td>1.54</td>
-            <td>1.70</td>
-            <td>2.48</td>
-            <td>4.26</td>
-            <td>6.86</td>
-            <td>4.79</td>
-            <td>6.00</td>
-            <td>2.59</td>
-            <td>3.58</td>
-        </tr>
-        <tr>
-            <td align="left"><a href="https://github.com/saic-vul/ritm_interactive_segmentation/releases/download/v1.0/coco_lvis_h18s_itermask.pth">HRNet18s IT-M<br>(16.5 MB)</a></td>
-            <td>1.54</td>
-            <td>1.68</td>
-            <td>2.60</td>
-            <td>4.04</td>
-            <td>6.48</td>
-            <td>4.70</td>
-            <td>5.98</td>
-            <td>2.57</td>
-            <td>3.33</td>
-        </tr>
-        <tr>
-            <td align="left"><a href="https://github.com/saic-vul/ritm_interactive_segmentation/releases/download/v1.0/coco_lvis_h18_itermask.pth">HRNet18 IT-M<br>(38.8 MB)</a></td>
-            <td><b>1.42</b></td>
-            <td><b>1.54</b></td>
-            <td><ins>2.26</ins></td>
-            <td>3.80</td>
-            <td>6.06</td>
-            <td><ins>4.36</ins></td>
-            <td><ins>5.74</ins></td>
-            <td><b>2.28</b></td>
-            <td><ins>2.98</ins></td>
-        </tr>
-        <tr>
-            <td align="left"><a href="https://github.com/saic-vul/ritm_interactive_segmentation/releases/download/v1.0/coco_lvis_h32_itermask.pth">HRNet32 IT-M<br>(119 MB)</a></td>
-            <td><ins>1.46</ins></td>
-            <td><ins>1.56</ins></td>
-            <td><b>2.10</b></td>
-            <td><ins>3.59</ins></td>
-            <td><ins>5.71</ins></td>
-            <td><b>4.11</b></td>
-            <td><b>5.34</b></td>
-            <td>2.57</td>
-            <td><b>2.97</b></td>
-        </tr>
-    </tbody>
-</table>
-
 
 ### Evaluation
 
@@ -215,9 +122,7 @@ python3 train.py models/iter_mask/hrnet18_avalanche_itermask_3p.py --gpus=0 --wo
 ```
 The data to be used needs to be specified in the [model](models/iter_mask/hrnet18_avalanche_itermask_3p.py) and in the [config.yml](config.yml)(see `EXPS_PATH` 
 variable). For each experiment, a separate folder is created in the `./experiments` with Tensorboard logs, text logs, 
-visualization and checkpoints. You can specify another path in the [config.yml](config.yml) .
-
-If you want to train interactive segmentation from an existing model, you need to download the weights and specify the paths to 
+visualization and checkpoints. You can specify another path in the [config.yml](config.yml). If you want to train interactive segmentation from an existing model, you need to download the weights and specify the paths to 
 them in [config.yml](config.yml).
 
 ## License
@@ -228,7 +133,7 @@ The original code was released under the MIT License by Sofiiuk et al. You may c
 
 If you find this work is useful for your research, please cite our paper:
 ```
-@Article{ias_aval_2024,
+@Article{hafner_ias2024,
 AUTHOR = {Hafner, E. D. and Kontogianni, T. and Caye Daudt, R. and Oberson, L. and Wegner, J. D. and Schindler, K. and B\"uhler, Y.},
 TITLE = {Interactive Snow Avalanche Segmentation from Webcam Imagery: results, potential and limitations},
 JOURNAL = {EGUsphere},
@@ -239,9 +144,9 @@ URL = {https://egusphere.copernicus.org/preprints/2024/egusphere-2024-498/},
 DOI = {10.5194/egusphere-2024-498}
 }
 ```
-as well as the work we aere able to built upon:
+as well as the work we were able to built upon:
 ```
-@article{reviving2021,
+@article{sofiiuk_ios2021,
   title={Reviving Iterative Training with Mask Guidance for Interactive Segmentation},
   author={Sofiiuk, Konstantin and Petrov, Ilia and Konushin, Anton},
   journal={arXiv preprint arXiv:2102.06583},
