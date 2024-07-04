@@ -1,52 +1,21 @@
-## Reviving Iterative Training with Mask Guidance for Interactive Segmentation 
+## Interactive segmentation for avalanches
+This repository provides the source code for the click-based interactive segmentation model for the following paper
 
-<p align="center">
-    <a href="https://paperswithcode.com/sota/interactive-segmentation-on-grabcut?p=reviving-iterative-training-with-mask">
-        <img src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/reviving-iterative-training-with-mask/interactive-segmentation-on-grabcut"/>
-    </a>
-    <a href="https://paperswithcode.com/sota/interactive-segmentation-on-berkeley?p=reviving-iterative-training-with-mask">
-        <img src="https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/reviving-iterative-training-with-mask/interactive-segmentation-on-berkeley"/>
-    </a>
-</p>
-
-<p align="center">
-  <img src="./assets/img/teaser.gif" alt="drawing", width="420"/>
-  <img src="./assets/img/miou_berkeley.png" alt="drawing", width="400"/>
-</p>
-
-<p align="center">
-    <a href="https://arxiv.org/abs/2102.06583">
-        <img src="https://img.shields.io/badge/arXiv-2102.06583-b31b1b"/>
-    </a>
-    <a href="https://colab.research.google.com/github/saic-vul/ritm_interactive_segmentation/blob/master/notebooks/colab_test_any_model.ipynb">
-        <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-    </a>
-    <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="The MIT License"/>
-    </a>
-</p>
-
-This repository provides the source code for training and testing state-of-the-art click-based interactive segmentation models with the official PyTorch implementation of the following paper:
-
-> **Reviving Iterative Training with Mask Guidance for Interactive Segmentation**<br>
-> [Konstantin Sofiiuk](https://github.com/ksofiyuk), [Ilia Petrov](https://github.com/ptrvilya), [Anton Konushin](https://scholar.google.com/citations?user=ZT_k-wMAAAAJ) <br>
-> Samsung AI Center Moscow <br>
-> https://arxiv.org/abs/2102.06583
+> **Interactive Snow Avalanche Segmentation from Webcam Imagery: results, potential and limitations**<br>
+> Hafner, E. D., Kontogianni, T., Caye Daudt, R., Oberson, L., Wegner, J. D., Schindler, K., and Bühler, Y., EGUsphere [preprint],<br>
+> https://doi.org/10.5194/egusphere-2024-498, 2024.
 >
-> **Abstract:** *Recent works on click-based interactive segmentation have demonstrated state-of-the-art results by 
-> using various inference-time optimization schemes. These methods are considerably more computationally expensive 
-> compared to feedforward approaches, as they require performing backward passes through a network during inference and 
-> are hard to deploy on mobile frameworks that usually support only forward passes. In this paper, we extensively 
-> evaluate various design choices for interactive segmentation and discover that new state-of-the-art results can be 
-> obtained without any additional optimization schemes. Thus, we propose a simple feedforward model for click-based 
-> interactive segmentation that employs the segmentation masks from previous steps. It allows not only to segment an 
-> entirely new object, but also to start with an external mask and correct it. When analyzing the performance of models
-> trained on different datasets, we observe that the choice of a training dataset greatly impacts the quality of 
-> interactive segmentation. We find that the models trained on a combination of COCO and LVIS with diverse and 
-> high-quality annotations show performance superior to all existing models.*
+the code that served as a basis was initially developed by 
+> **Konstantin Sofiiuk, Ilia Petrov, Anton Konushin**<br>
+> Samsung Research
+
+and published in the following paper and repository 
+
+> Reviving Iterative Training with Mask Guidance for Interactive Segmentation, https://arxiv.org/abs/2102.06583<br>
+> https://github.com/SamsungLabs/ritm_interactive_segmentation
 
 
-## Setting up an environment
+## Setting up the environment
 
 This framework is built using Python 3.6 and relies on the PyTorch 1.4.0+. The following command installs all 
 necessary packages:
@@ -54,8 +23,6 @@ necessary packages:
 ```.bash
 pip3 install -r requirements.txt
 ```
-
-You can also use our [Dockerfile](./Dockerfile) to build a container with the configured environment. 
 
 If you want to run training or testing, you must configure the paths to the datasets in [config.yml](config.yml).
 
