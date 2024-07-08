@@ -26,7 +26,7 @@ If you want to run training or testing, you must configure the paths to the data
 ## Interactive Avalanche Segmentation Demo
 
 <p align="center">
-  <img src="./assets/img/tmp_ias.JPG" alt="drawing" width="99%"/>
+  <img src="./assets/img/IAS_demo.png" alt="drawing" width="99%"/>
 </p>
 
 The GUI is based on TkInter library and its Python bindings. You can try to interactivly segment avalanches with the demo with one of the 

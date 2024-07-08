@@ -18,7 +18,7 @@ class InteractiveDemoApp(ttk.Frame):
     def __init__(self, master, args, model):
         super().__init__(master)
         self.master = master
-        master.title("Reviving Iterative Training with Mask Guidance for Interactive Segmentation")
+        master.title("Interactive Avalanche Segmentation Demo")
         master.withdraw()
         master.update_idletasks()
         x = (master.winfo_screenwidth() - master.winfo_reqwidth()) / 2
@@ -41,12 +41,12 @@ class InteractiveDemoApp(ttk.Frame):
         master.bind('<space>', lambda event: self._finish_object())
         master.bind('a', lambda event: self.controller.partially_finish_object())
 
-        self.state['zoomin_params']['skip_clicks'].trace(mode='w', callback=self._reset_predictor)
-        self.state['zoomin_params']['target_size'].trace(mode='w', callback=self._reset_predictor)
-        self.state['zoomin_params']['expansion_ratio'].trace(mode='w', callback=self._reset_predictor)
-        self.state['predictor_params']['net_clicks_limit'].trace(mode='w', callback=self._change_brs_mode)
-        self.state['lbfgs_max_iters'].trace(mode='w', callback=self._change_brs_mode)
-        self._change_brs_mode()
+        #self.state['zoomin_params']['skip_clicks'].trace(mode='w', callback=self._reset_predictor)
+        #self.state['zoomin_params']['target_size'].trace(mode='w', callback=self._reset_predictor)
+        #self.state['zoomin_params']['expansion_ratio'].trace(mode='w', callback=self._reset_predictor)
+        #self.state['predictor_params']['net_clicks_limit'].trace(mode='w', callback=self._change_brs_mode)
+        #self.state['lbfgs_max_iters'].trace(mode='w', callback=self._change_brs_mode)
+        #self._change_brs_mode()
 
     def _init_state(self):
         self.state = {
@@ -142,47 +142,52 @@ class InteractiveDemoApp(ttk.Frame):
                         state=tk.NORMAL, command=self._dismiss_bbox)
         self.dismiss_bbx_button.pack(side=tk.LEFT, fill=tk.X, padx=10, pady=3)
 
+        #zoom-in (disabled)
+        #self.zoomin_options_frame = FocusLabelFrame(master, text="ZoomIn options")
+        #self.zoomin_options_frame.pack(side=tk.TOP, fill=tk.X, padx=10, pady=3)
+        #FocusCheckButton(self.zoomin_options_frame, text='Use ZoomIn', command=self._reset_predictor,
+        #                 variable=self.state['zoomin_params']['use_zoom_in']).grid(row=0, column=0, padx=10)
+        #FocusCheckButton(self.zoomin_options_frame, text='Fixed crop', command=self._reset_predictor,
+        #                 variable=self.state['zoomin_params']['fixed_crop']).grid(row=1, column=0, padx=10)
+        #tk.Label(self.zoomin_options_frame, text="Skip clicks").grid(row=0, column=1, pady=1, sticky='e')
+        #tk.Label(self.zoomin_options_frame, text="Target size").grid(row=1, column=1, pady=1, sticky='e')
+        #tk.Label(self.zoomin_options_frame, text="Expand ratio").grid(row=2, column=1, pady=1, sticky='e')
+        #BoundedNumericalEntry(self.zoomin_options_frame, variable=self.state['zoomin_params']['skip_clicks'],
+        #                      min_value=-1, max_value=None, vartype=int,
+        #                      name='zoom_in_skip_clicks').grid(row=0, column=2, padx=10, pady=1, sticky='w')
+        #BoundedNumericalEntry(self.zoomin_options_frame, variable=self.state['zoomin_params']['target_size'],
+        #                      min_value=100, max_value=self.limit_longest_size, vartype=int,
+        #                      name='zoom_in_target_size').grid(row=1, column=2, padx=10, pady=1, sticky='w')
+        #BoundedNumericalEntry(self.zoomin_options_frame, variable=self.state['zoomin_params']['expansion_ratio'],
+        #                      min_value=1.0, max_value=2.0, vartype=float,
+        #                      name='zoom_in_expansion_ratio').grid(row=2, column=2, padx=10, pady=1, sticky='w')
+        #self.zoomin_options_frame.columnconfigure((0, 1, 2), weight=1)
 
-        self.zoomin_options_frame = FocusLabelFrame(master, text="ZoomIn options")
-        self.zoomin_options_frame.pack(side=tk.TOP, fill=tk.X, padx=10, pady=3)
-        FocusCheckButton(self.zoomin_options_frame, text='Use ZoomIn', command=self._reset_predictor,
-                         variable=self.state['zoomin_params']['use_zoom_in']).grid(row=0, column=0, padx=10)
-        FocusCheckButton(self.zoomin_options_frame, text='Fixed crop', command=self._reset_predictor,
-                         variable=self.state['zoomin_params']['fixed_crop']).grid(row=1, column=0, padx=10)
-        tk.Label(self.zoomin_options_frame, text="Skip clicks").grid(row=0, column=1, pady=1, sticky='e')
-        tk.Label(self.zoomin_options_frame, text="Target size").grid(row=1, column=1, pady=1, sticky='e')
-        tk.Label(self.zoomin_options_frame, text="Expand ratio").grid(row=2, column=1, pady=1, sticky='e')
-        BoundedNumericalEntry(self.zoomin_options_frame, variable=self.state['zoomin_params']['skip_clicks'],
-                              min_value=-1, max_value=None, vartype=int,
-                              name='zoom_in_skip_clicks').grid(row=0, column=2, padx=10, pady=1, sticky='w')
-        BoundedNumericalEntry(self.zoomin_options_frame, variable=self.state['zoomin_params']['target_size'],
-                              min_value=100, max_value=self.limit_longest_size, vartype=int,
-                              name='zoom_in_target_size').grid(row=1, column=2, padx=10, pady=1, sticky='w')
-        BoundedNumericalEntry(self.zoomin_options_frame, variable=self.state['zoomin_params']['expansion_ratio'],
-                              min_value=1.0, max_value=2.0, vartype=float,
-                              name='zoom_in_expansion_ratio').grid(row=2, column=2, padx=10, pady=1, sticky='w')
-        self.zoomin_options_frame.columnconfigure((0, 1, 2), weight=1)
 
+        #disable brs mode change
         self.brs_options_frame = FocusLabelFrame(master, text="BRS options")
         self.brs_options_frame.pack(side=tk.TOP, fill=tk.X, padx=10, pady=3)
-        menu = tk.OptionMenu(self.brs_options_frame, self.state['brs_mode'],
-                             *self.brs_modes, command=self._change_brs_mode)
-        menu.config(width=11)
-        menu.grid(rowspan=2, column=0, padx=10)
-        self.net_clicks_label = tk.Label(self.brs_options_frame, text="Network clicks")
-        self.net_clicks_label.grid(row=0, column=1, pady=2, sticky='e')
-        self.net_clicks_entry = BoundedNumericalEntry(self.brs_options_frame,
-                                                      variable=self.state['predictor_params']['net_clicks_limit'],
-                                                      min_value=0, max_value=None, vartype=int, allow_inf=True,
-                                                      name='net_clicks_limit')
-        self.net_clicks_entry.grid(row=0, column=2, padx=10, pady=2, sticky='w')
-        self.lbfgs_iters_label = tk.Label(self.brs_options_frame, text="L-BFGS\nmax iterations")
-        self.lbfgs_iters_label.grid(row=1, column=1, pady=2, sticky='e')
-        self.lbfgs_iters_entry = BoundedNumericalEntry(self.brs_options_frame, variable=self.state['lbfgs_max_iters'],
-                                                       min_value=1, max_value=1000, vartype=int,
-                                                       name='lbfgs_max_iters')
-        self.lbfgs_iters_entry.grid(row=1, column=2, padx=10, pady=2, sticky='w')
+        #menu = tk.OptionMenu(self.brs_options_frame, self.state['brs_mode'],
+        #                 *self.brs_modes, command=self._change_brs_mode)
+        #menu.config(width=11)
+        #menu.grid(rowspan=2, column=0, padx=10)
+        #self.net_clicks_label = tk.Label(self.brs_options_frame, text="Network clicks")
+        #self.net_clicks_label.grid(row=0, column=1, pady=2, sticky='e')
+        #self.net_clicks_entry = BoundedNumericalEntry(self.brs_options_frame,
+        #                                              variable=self.state['predictor_params']['net_clicks_limit'],
+        #                                              min_value=0, max_value=None, vartype=int, allow_inf=True,
+        #                                              name='net_clicks_limit')
+        #self.net_clicks_entry.grid(row=0, column=2, padx=10, pady=2, sticky='w')
+        #self.lbfgs_iters_label = tk.Label(self.brs_options_frame, text="L-BFGS\nmax iterations")
+        #self.lbfgs_iters_label.grid(row=1, column=1, pady=2, sticky='e')
+        #self.lbfgs_iters_entry = BoundedNumericalEntry(self.brs_options_frame, variable=self.state['lbfgs_max_iters'],
+        #                                               min_value=1, max_value=1000, vartype=int,
+        #                                               name='lbfgs_max_iters')
+        #self.lbfgs_iters_entry.grid(row=1, column=2, padx=10, pady=2, sticky='w')
         self.brs_options_frame.columnconfigure((0, 1), weight=1)
+
+
+
 
         self.prob_thresh_frame = FocusLabelFrame(master, text="Predictions threshold")
         self.prob_thresh_frame.pack(side=tk.TOP, fill=tk.X, padx=10, pady=3)
@@ -266,9 +271,11 @@ class InteractiveDemoApp(ttk.Frame):
         self.menubar.focus_set()
 
         text = [
-            "Developed by:",
+            "Initially developed by:",
             "K.Sofiiuk and I. Petrov",
-            "The MIT License, 2021"
+            "(The MIT License, 2021)",
+            "adapted for avalanches by:",
+            "E.D.Hafner and L. Oberson"
         ]
 
         messagebox.showinfo("About Demo", '\n'.join(text))
@@ -296,27 +303,27 @@ class InteractiveDemoApp(ttk.Frame):
 
         self._update_image()
 
-    def _change_brs_mode(self, *args):
-        if self.state['brs_mode'].get() == 'NoBRS':
-            self.net_clicks_entry.set('INF')
-            self.net_clicks_entry.configure(state=tk.DISABLED)
-            self.net_clicks_label.configure(state=tk.DISABLED)
-            self.lbfgs_iters_entry.configure(state=tk.DISABLED)
-            self.lbfgs_iters_label.configure(state=tk.DISABLED)
-        else:
-            if self.net_clicks_entry.get() == 'INF':
-                self.net_clicks_entry.set(8)
-            self.net_clicks_entry.configure(state=tk.NORMAL)
-            self.net_clicks_label.configure(state=tk.NORMAL)
-            self.lbfgs_iters_entry.configure(state=tk.NORMAL)
-            self.lbfgs_iters_label.configure(state=tk.NORMAL)
+    #def _change_brs_mode(self, *args):
+    #    if self.state['brs_mode'].get() == 'NoBRS':
+            #self.net_clicks_entry.set('INF')
+            #self.net_clicks_entry.configure(state=tk.DISABLED)
+            #self.net_clicks_label.configure(state=tk.DISABLED)
+            #self.lbfgs_iters_entry.configure(state=tk.DISABLED)
+            #self.lbfgs_iters_label.configure(state=tk.DISABLED)
+    #    else:
+            #if self.net_clicks_entry.get() == 'INF':
+            #    self.net_clicks_entry.set(8)
+            #self.net_clicks_entry.configure(state=tk.NORMAL)
+            #self.net_clicks_label.configure(state=tk.NORMAL)
+            #self.lbfgs_iters_entry.configure(state=tk.NORMAL)
+            #self.lbfgs_iters_label.configure(state=tk.NORMAL)
 
-        self._reset_predictor()
+    #    self._reset_predictor()
 
     def _reset_predictor(self, *args, **kwargs):
         brs_mode = self.state['brs_mode'].get()
         prob_thresh = self.state['prob_thresh'].get()
-        net_clicks_limit = None if brs_mode == 'NoBRS' else self.state['predictor_params']['net_clicks_limit'].get()
+        #net_clicks_limit = None if brs_mode == 'NoBRS' else self.state['predictor_params']['net_clicks_limit'].get()
 
         if self.state['zoomin_params']['use_zoom_in'].get():
             zoomin_params = {
@@ -334,11 +341,11 @@ class InteractiveDemoApp(ttk.Frame):
             'prob_thresh': prob_thresh,
             'zoom_in_params': zoomin_params,
             'predictor_params': {
-                'net_clicks_limit': net_clicks_limit,
+                #'net_clicks_limit': net_clicks_limit,
                 'max_size': self.limit_longest_size
             },
             'brs_opt_func_params': {'min_iou_diff': 1e-3},
-            'lbfgs_params': {'maxfun': self.state['lbfgs_max_iters'].get()}
+            #'lbfgs_params': {'maxfun': self.state['lbfgs_max_iters'].get()}
         }
 
         if self.bbox != None:
@@ -417,7 +424,7 @@ class InteractiveDemoApp(ttk.Frame):
         self.finish_object_button.configure(state=after_1st_click_state)
         self.undo_click_button.configure(state=after_1st_click_state)
         self.reset_clicks_button.configure(state=after_1st_click_state)
-        self.zoomin_options_frame.set_frame_state(before_1st_click_state)
+        #self.zoomin_options_frame.set_frame_state(before_1st_click_state)
         self.brs_options_frame.set_frame_state(before_1st_click_state)
                 
         if self.image_on_canvas.bbox == None:
@@ -427,21 +434,21 @@ class InteractiveDemoApp(ttk.Frame):
             self.state['zoomin_params']['use_zoom_in'].set(False)
             self.state['zoomin_params']['fixed_crop'].set(False)
             self.state['brs_mode'].set('NoBRS')
-            self._change_brs_mode()
+            #self._change_brs_mode()
             
             self.reset_bbx_button.configure(state=tk.NORMAL)
-            self.zoomin_options_frame.set_frame_state(state=tk.DISABLED)
-            self.brs_options_frame.set_frame_state(state=tk.DISABLED)
+            #self.zoomin_options_frame.set_frame_state(state=tk.DISABLED)
+            #self.brs_options_frame.set_frame_state(state=tk.DISABLED)
             if self.bbox is None:
                 self.confirm_bbx_button.configure(state=tk.NORMAL)
             else:
                 self.confirm_bbx_button.configure(state=tk.DISABLED)
 
-        if self.state['brs_mode'].get() == 'NoBRS':
-            self.net_clicks_entry.configure(state=tk.DISABLED)
-            self.net_clicks_label.configure(state=tk.DISABLED)
-            self.lbfgs_iters_entry.configure(state=tk.DISABLED)
-            self.lbfgs_iters_label.configure(state=tk.DISABLED)
+        #if self.state['brs_mode'].get() == 'NoBRS':
+            #self.net_clicks_entry.configure(state=tk.DISABLED)
+            #self.net_clicks_label.configure(state=tk.DISABLED)
+        #    self.lbfgs_iters_entry.configure(state=tk.DISABLED)
+        #    self.lbfgs_iters_label.configure(state=tk.DISABLED)
 
     def _check_entry(self, widget):
         all_checked = True

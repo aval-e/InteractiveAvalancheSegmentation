@@ -14,7 +14,7 @@ from datetime import datetime
 
 
 class InteractiveController:
-    def __init__(self, net, device, predictor_params, update_image_callback, prob_thresh=0.49): #set to 0.49 to equalize with evaluation instead of 0.75
+    def __init__(self, net, device, predictor_params, update_image_callback, prob_thresh=0.5): 
         self.net = net
         self.prob_thresh = prob_thresh
         self.clicker = clicker.Clicker()
@@ -42,12 +42,12 @@ class InteractiveController:
         self.image_name = filename
 
         # added aval-e for saving data for User study
-        my_list = [self.image_name,] #write name of image to file
-        list2 = ["time_of_click", "click_count", "type_click", "x", "y", "IoU"]
-        with open('/data/ritm_interactive_segmentation/datasets/User_Study/Results/tmp.csv', 'a', newline='') as file: # Opening a CSV file in append mode
-            writer = csv.writer(file) # Using csv.writer to write the list to the CSV file
-            writer.writerow(my_list)  # Use writerow for single list
-            writer.writerow(list2)
+        #my_list = [self.image_name,] #write name of image to file
+        #list2 = ["time_of_click", "click_count", "type_click", "x", "y", "IoU"]
+        #with open('/data/ritm_interactive_segmentation/datasets/User_Study/Results/tmp.csv', 'a', newline='') as file: # Opening a CSV file in append mode
+        #    writer = csv.writer(file) # Using csv.writer to write the list to the CSV file
+        #    writer.writerow(my_list)  # Use writerow for single list
+        #    writer.writerow(list2)
 
 
 
@@ -92,28 +92,28 @@ class InteractiveController:
 
         ##added aval-e
         ## exclude from here if it is not supposed to write the masks after each click and save coordinates and IoU
-        i = self.clicker.num_neg_clicks + self.clicker.num_pos_clicks  ##+1 to account for python counting from 0
-        i_i = str(i)
-        script_dir = "/data/ritm_interactive_segmentation/datasets/User_Study/Results"
-        filename = os.path.join(script_dir,self.image_name + '_' + i_i + '.png')
-        temp_mask = self.result_mask
-        gt_dir = "/data/ritm_interactive_segmentation/datasets/User_Study/GT-masks"
-        gt_file = os.path.join(gt_dir, self.image_name +'.png')
+        #i = self.clicker.num_neg_clicks + self.clicker.num_pos_clicks  ##+1 to account for python counting from 0
+        #i_i = str(i)
+        #script_dir = "/data/ritm_interactive_segmentation/datasets/User_Study/Results"
+        #filename = os.path.join(script_dir,self.image_name + '_' + i_i + '.png')
+        #temp_mask = self.result_mask
+        #gt_dir = "/data/ritm_interactive_segmentation/datasets/User_Study/GT-masks"
+        #gt_file = os.path.join(gt_dir, self.image_name +'.png')
         #print("gt", gt_file)
-        gt_mask = cv2.imread(gt_file)[:, :, 0] > 127
-        iou = utils.get_iou(gt_mask, temp_mask)
+        #gt_mask = cv2.imread(gt_file)[:, :, 0] > 127
+        #iou = utils.get_iou(gt_mask, temp_mask)
         #print("IoU:", iou)
-        temp_mask = temp_mask.astype(np.uint8)
-        temp_mask *= 255 // temp_mask.max()
-        if not cv2.imwrite(filename, temp_mask):
-            raise Exception("Could not write prediction")
+        #temp_mask = temp_mask.astype(np.uint8)
+        #temp_mask *= 255 // temp_mask.max()
+        #if not cv2.imwrite(filename, temp_mask):
+        #    raise Exception("Could not write prediction")
         #print("click:", i, is_positive, "x", x, "y", y, "IoU", iou) #save this to file for user study
-        my_list = [current_time, i, is_positive, x, y, iou]
+        #my_list = [current_time, i, is_positive, x, y, iou]
 
-        with open('/data/ritm_interactive_segmentation/datasets/User_Study/Results/tmp.csv', 'a',
-                  newline='') as file:  # Opening a CSV file in append mode
-            writer = csv.writer(file)  # Using csv.writer to write the list to the CSV file
-            writer.writerow(my_list)  # Use writerow for single list
+        #with open('/data/ritm_interactive_segmentation/datasets/User_Study/Results/tmp.csv', 'a',
+        #          newline='') as file:  # Opening a CSV file in append mode
+        #    writer = csv.writer(file)  # Using csv.writer to write the list to the CSV file
+        #    writer.writerow(my_list)  # Use writerow for single list
 
     def undo_click(self):
         if not self.states:
@@ -154,12 +154,13 @@ class InteractiveController:
         self.object_count += 1
         self.reset_last_object()
         now = datetime.now()
-        current_time = now.strftime("%H:%M:%S") #add to file
-        print(current_time)
-        my_list = [current_time, "avalanche finished"] #write name of image to file
-        with open('/data/ritm_interactive_segmentation/datasets/User_Study/Results/tmp.csv', 'a', newline='') as file: # Opening a CSV file in append mode
-            writer = csv.writer(file) # Using csv.writer to write the list to the CSV file
-            writer.writerow(my_list)  # Use writerow for single list
+        #added aval-e for user study
+        #current_time = now.strftime("%H:%M:%S") #add to file
+        #print(current_time)
+        #my_list = [current_time, "avalanche finished"] #write name of image to file
+        #with open('/data/ritm_interactive_segmentation/datasets/User_Study/Results/tmp.csv', 'a', newline='') as file: # Opening a CSV file in append mode
+        #    writer = csv.writer(file) # Using csv.writer to write the list to the CSV file
+        #    writer.writerow(my_list)  # Use writerow for single list
 
     def reset_last_object(self, update_image=True):
         self.states = []
