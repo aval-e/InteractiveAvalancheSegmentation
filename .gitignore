@@ -1,6 +1,5 @@
 .idea/*
 *__pycache__*
-weights
 experiments
 pretrained_models
 *.so
@@ -8,3 +7,4 @@ pretrained_models
 *.yml
 *.json
 datasets
+checkpoints1
