@@ -1,0 +1,29 @@
+name: RITM
+channels:
+  - defaults
+  - conda-forge
+  - fastai
+dependencies:
+  - python=3.6
+  - pip
+  - scipy
+  - scikit-image
+  - scikit-learn
+  - numpy
+  - pandas
+  - cython
+  - Pillow
+  - matplotlib
+  - imgaug>=0.4
+  - albumentations=0.5.1
+  - graphviz
+  - pyyaml
+  - easydict
+  - future
+  - cffi
+  - ninja
+  - opencv-python-headless
+  - tensorboard
+  - tqdm
+  - ipywidgets
+  - jupyter
