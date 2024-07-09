@@ -93,13 +93,13 @@ You can find model weights and evaluation results in the tables below:
 
 | Dataset    |       PTH model file         |
 |------------|:----------------------------:|
-|SLF         |  [082_epo095.pth][SLF1]      |
+|SLF         |  [082_epo090.pth][SLF1]      |
 |UIBK        |  [116_epo090.pth][UIBK1]     |
 |SLF + UIBK  |  [115_epo095.pth][SLF_UIBK]  |
 
-[SLF1]: addlinkgit.pth
-[UIBK1]: addlinkgit.pth
-[SLF_UIBK]: addlinkgit.pth
+[SLF1]: checkpoints/082_epo090.pth
+[UIBK1]: checkpoints/116_epo090.pth
+[SLF_UIBK]: checkpoints/115_epo095.pth
 
 
 ### Evaluation

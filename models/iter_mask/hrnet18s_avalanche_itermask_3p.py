@@ -1,7 +1,7 @@
 from torchvision.transforms import Compose
 
 from isegm.utils.exp_imports.default import *
-MODEL_NAME = 'avalanche_hrnet18s'
+MODEL_NAME = 'avalanche_hrnet18s' #train version for a leaner version of hrnet, not used on publication
 
 def main(cfg):
     model, model_cfg = init_model(cfg)
@@ -71,12 +71,6 @@ def train(model, cfg, model_cfg):
         points_sampler=points_sampler,
     )
 
-    # optimizer_params = {
-    #     'lr': 5e-4, 'betas': (0.9, 0.999), 'eps': 1e-8
-    # }
-    #
-    # lr_scheduler = partial(torch.optim.lr_scheduler.MultiStepLR,
-    #                        milestones=[200, 220], gamma=0.1)
     optimizer_params = {
         'lr': 5e-4, 'betas': (0.9, 0.999), 'eps': 1e-8 #lr default 5e-4
     }

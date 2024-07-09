@@ -8,7 +8,7 @@ from pycocotools.coco import COCO
 dataset = 'Avalanche_1'
 
 # Input data
-imgage_original_dir = f"/data/annotated_avalanches/{dataset}/images_original" #Rohdaten aus dem Scalabel
+imgage_original_dir = f"/data/annotated_avalanches/{dataset}/images_original" #raw data from sclabel
 ann_original_file = f"/data/annotated_avalanches/{dataset}/annotations_original/instances.json"
 
 # Output folder

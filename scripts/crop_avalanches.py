@@ -8,7 +8,7 @@ sys.path.insert(0, '.')
 from isegm.utils.misc import get_bbox_from_mask, expand_bbox, clamp_bbox
 
 def main():
-    # Target Size, e.g. 1000x1000 pixel
+    # Target Size, e.g. 1000x1000 pixel for training the model
     target_size = 1000
     
     # Dataset
